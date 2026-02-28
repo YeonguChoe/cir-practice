@@ -54,7 +54,7 @@ ninja -C build clang
     mlir::Block *EndBlock = builder.createBlock(Region, Region->end());
     EndBlock->addArgument(ResultTy, Loc);
 
-    // // ^Entry: if NaN -> End(NanLiteral), else -> InfBlock
+    // ^Entry: if NaN -> End(NanLiteral), else -> InfBlock
     builder.setInsertionPointToEnd(EntryBlock);
     mlir::Value IsNan = builder.createIsFPClass(Loc, V, cir::FPClassTest::Nan);
     cir::BrCondOp::create(builder, Loc, IsNan, EndBlock,
