@@ -44,3 +44,7 @@ git commit -m "<message>"
 - cancel commit and move back fixed code to staged area: `git reset --soft HEAD~1`
 
 8. push to my repository
+
+```bash
+git push --force-with-lease
+```
