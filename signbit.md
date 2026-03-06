@@ -10,7 +10,7 @@ return RValue::get(builder.createBoolToInt(signbit, convertType(e->getType())));
 ```
 
 
-### test
+### test (`clang/test/CIR/CodeGenBuiltins`)
 
 ```c
 // RUN: %clang_cc1 -fclangir -emit-cir %s -o %t.cir
