@@ -13,7 +13,7 @@
 ```
 
 
-### test (`clang/test/CIR/CodeGenBuiltins`)
+### test (`clang/test/CIR/CodeGenBuiltins/builtin-signbit.c`)
 
 ```c
 // RUN: %clang_cc1 -fclangir -emit-cir %s -o %t.cir
