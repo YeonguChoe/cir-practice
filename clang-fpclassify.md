@@ -93,6 +93,35 @@ def fp_classify():
 ```
 - clang/test/CodeGen/strictfp_builtins.c
   - Line 159: `#[[ATTR5:[0-9]+]]`
-
+  - test_fpclass
+  ```c
+  // CHECK-LABEL: @test_fpclassify(
+// CHECK-NEXT:  entry:
+// CHECK-NEXT:    [[D_ADDR:%.*]] = alloca double, align 8
+// CHECK-NEXT:    store double [[D:%.*]], ptr [[D_ADDR]], align 8
+// CHECK-NEXT:    [[TMP0:%.*]] = load double, ptr [[D_ADDR]], align 8
+// CHECK-NEXT:    [[TMP1:%.*]] = call i1 @llvm.is.fpclass.f64(double [[TMP0]], i32 3) #[[ATTR:[0-9]+]]
+// CHECK-NEXT:    br i1 [[TMP1]], label [[FPCLASSIFY_END:%.*]], label [[FPCLASSIFY_NOT_NAN:%.*]]
+// CHECK:       fpclassify_not_nan:
+// CHECK-NEXT:    [[TMP2:%.*]] = call i1 @llvm.is.fpclass.f64(double [[TMP0]], i32 516) #[[ATTR]]
+// CHECK-NEXT:    br i1 [[TMP2]], label [[FPCLASSIFY_END]], label [[FPCLASSIFY_NOT_INF:%.*]]
+// CHECK:       fpclassify_not_inf:
+// CHECK-NEXT:    [[TMP3:%.*]] = call i1 @llvm.is.fpclass.f64(double [[TMP0]], i32 264) #[[ATTR]]
+// CHECK-NEXT:    br i1 [[TMP3]], label [[FPCLASSIFY_END]], label [[FPCLASSIFY_NOT_NORMAL:%.*]]
+// CHECK:       fpclassify_not_normal:
+// CHECK-NEXT:    [[TMP4:%.*]] = call i1 @llvm.is.fpclass.f64(double [[TMP0]], i32 144) #[[ATTR]]
+// CHECK-NEXT:    br i1 [[TMP4]], label [[FPCLASSIFY_END]], label [[FPCLASSIFY_NOT_SUBNORMAL:%.*]]
+// CHECK:       fpclassify_not_subnormal:
+// CHECK-NEXT:    br label [[FPCLASSIFY_END]]
+// CHECK:       fpclassify_end:
+// CHECK-NEXT:    [[FPCLASSIFY_RESULT:%.*]] = phi i32 [ 0, [[ENTRY:%.*]] ], [ 1, [[FPCLASSIFY_NOT_NAN]] ], [ 2, [[FPCLASSIFY_NOT_INF]] ], [ 3, [[FPCLASSIFY_NOT_NORMAL]] ], [ 4, [[FPCLASSIFY_NOT_SUBNORMAL]] ]
+// CHECK-NEXT:    call void @p(ptr noundef @.str.1, i32 noundef [[FPCLASSIFY_RESULT]]) #[[ATTR]]
+// CHECK-NEXT:    ret void
+//
+void test_fpclassify(double d) {
+  P(fpclassify, (0, 1, 2, 3, 4, d));
+  return;
+}
+  ```
 
 - clang/test/Headers/nvptx_device_math_macro.cpp
