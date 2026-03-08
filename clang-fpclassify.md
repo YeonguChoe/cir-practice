@@ -4,8 +4,6 @@
 
 ### Files
 - clang/lib/CodeGen/CGBuiltin.cpp
-- clang/test/CodeGen/strictfp_builtins.c
-- clang/test/Headers/nvptx_device_math_macro.cpp
 
 ```cpp
   case Builtin::BI__builtin_fpclassify: {
@@ -93,3 +91,8 @@ def fp_classify():
                     return zero_literal
 
 ```
+- clang/test/CodeGen/strictfp_builtins.c
+
+
+
+- clang/test/Headers/nvptx_device_math_macro.cpp
