@@ -94,8 +94,9 @@ def fp_classify():
 - clang/test/CodeGen/strictfp_builtins.c
   - Line 159: `#[[ATTR5:[0-9]+]]`
   - test_fpclass
-  ```c
-  // CHECK-LABEL: @test_fpclassify(
+ 
+```c
+// CHECK-LABEL: @test_fpclassify(
 // CHECK-NEXT:  entry:
 // CHECK-NEXT:    [[D_ADDR:%.*]] = alloca double, align 8
 // CHECK-NEXT:    store double [[D:%.*]], ptr [[D_ADDR]], align 8
@@ -122,6 +123,6 @@ void test_fpclassify(double d) {
   P(fpclassify, (0, 1, 2, 3, 4, d));
   return;
 }
-  ```
+```
 
 - clang/test/Headers/nvptx_device_math_macro.cpp
