@@ -92,7 +92,7 @@ def fp_classify():
 
 ```
 - clang/test/CodeGen/strictfp_builtins.c
-
+  - Line 159: `#[[ATTR5:[0-9]+]]`
 
 
 - clang/test/Headers/nvptx_device_math_macro.cpp
