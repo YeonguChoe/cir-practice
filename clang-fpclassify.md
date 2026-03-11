@@ -161,7 +161,7 @@ void test_fpclassify(double d) {
 
 ```c
   ul = __builtin_bswapg(ul);
-  // CHECK: call [[LDLLVMTY:[a-z0-9]+]] @llvm.bswap.[[LONGINTTY]]
+  // CHECK: call [[LONGINTTY:[a-z0-9]+]] @llvm.bswap.[[LONGINTTY]]
 ```
 
 
