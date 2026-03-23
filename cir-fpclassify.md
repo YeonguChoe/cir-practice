@@ -76,11 +76,11 @@
 // RUN: %clang_cc1 -triple x86_64-unknown-linux-gnu -emit-llvm %s -o %t.ll
 // RUN: FileCheck %s --check-prefix=OGCG --input-file %t.ll
 
-#define FP_NAN       3
-#define FP_INFINITE  516
-#define FP_ZERO      96
+#define FP_NAN 3
+#define FP_INFINITE 516
+#define FP_ZERO 96
 #define FP_SUBNORMAL 144
-#define FP_NORMAL    264
+#define FP_NORMAL 264
 
 void test_fpclassify_nan(){
     float nanValue = 0.0f / 0.0f;
