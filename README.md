@@ -15,19 +15,24 @@ ninja -j9 && ninja check-clang -j9
 # Test
 
 ```bash
-build/bin/llvm-lit ../clang/test/CIR/<test-file>
+build/bin/llvm-lit ../clang/test/CIR/<test file>
+```
+
+# Test: C/C++ -> CIR -> LLVM IR
+```bash
+clang -fclangir -emit-cir <C/C++ file> -o - | cir-translate --cir-to-llvmir - -o <LLVM IR file>
 ```
 
 # Lower C/C++ into CIR file
 
 ```bash
-clang -fclangir -emit-cir <C/C++ filename>
+clang -fclangir -emit-cir <C/C++ file>
 ```
 
 ### Format LLVM-Project Code
 
 ```bash
-clang-format -i -style=llvm file.cpp
+clang-format -i -style=llvm <file>
 ```
 
 ## File to change
