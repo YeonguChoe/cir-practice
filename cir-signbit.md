@@ -165,4 +165,5 @@ void test_signbit_negative_infinity(){
 // OGCG: %{{[0-9]+}} = icmp slt i{{[0-9]+}} %{{[0-9]+}}, 0
 // OGCG: %{{[0-9]+}} = zext i1 %{{[0-9]+}} to i{{[0-9]+}}
 }
+
 ```
