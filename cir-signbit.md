@@ -18,8 +18,8 @@
 // RUN: %clang_cc1 -triple x86_64-unknown-linux-gnu -fclangir -emit-cir %s -o %t.cir
 // RUN: FileCheck %s --check-prefix=CIR --input-file %t.cir
 
-void test_signbit_zero(){
-  double positiveZero = 0.0;
+void test_signbit_positive_zero(){
+  double positiveZero = +0.0;
   __builtin_signbit(positiveZero);
 // CIR: %[[ALLOCA:.*]] = cir.alloca !cir.double
 // CIR: %[[CONST:.*]] = cir.const #cir.fp<0.000000e+00> : !cir.double
