@@ -36,10 +36,10 @@ void test_signbit_positive_zero(){
 // LLVM: icmp slt i64 %{{.*}}, 0
 // LLVM: zext i1 %{{.*}} to i32
 
-// OGCG: %{{[0-9]+}} = load double, ptr %[[V0:[a-zA-Z0-9]+]]
-// OGCG: %{{[0-9]+}} = bitcast double %{{[0-9]+}} to i{{[0-9]+}}
-// OGCG: %{{[0-9]+}} = icmp slt i{{[0-9]+}} %{{[0-9]+}}, 0
-// OGCG: %{{[0-9]+}} = zext i1 %{{[0-9]+}} to i{{[0-9]+}}
+// OGCG: store double 0.000000e+00, ptr %{{.*}}
+// OGCG: bitcast double %{{.*}} to i64
+// OGCG: icmp slt i64 %{{.*}}, 0
+// OGCG: zext i1 %{{.*}} to i32
 }
 
 void test_signbit_negative_zero(){
@@ -55,10 +55,10 @@ void test_signbit_negative_zero(){
 // LLVM: icmp slt i64 %{{.*}}, 0
 // LLVM: zext i1 %{{.*}} to i32
 
-// OGCG: %{{[0-9]+}} = load double, ptr %[[V0:[a-zA-Z0-9]+]]
-// OGCG: %{{[0-9]+}} = bitcast double %{{[0-9]+}} to i{{[0-9]+}}
-// OGCG: %{{[0-9]+}} = icmp slt i{{[0-9]+}} %{{[0-9]+}}, 0
-// OGCG: %{{[0-9]+}} = zext i1 %{{[0-9]+}} to i{{[0-9]+}}
+// OGCG: store double -0.000000e+00, ptr %{{.*}}
+// OGCG: bitcast double %{{.*}} to i64
+// OGCG: icmp slt i64 %{{.*}}, 0
+// OGCG: zext i1 %{{.*}} to i32
 }
 
 void test_signbit_positive_number(){
@@ -74,10 +74,10 @@ void test_signbit_positive_number(){
 // LLVM: icmp slt i64 %{{.*}}, 0
 // LLVM: zext i1 %{{.*}} to i32
 
-// OGCG: %{{[0-9]+}} = load double, ptr %[[V0:[a-zA-Z0-9]+]]
-// OGCG: %{{[0-9]+}} = bitcast double %{{[0-9]+}} to i{{[0-9]+}}
-// OGCG: %{{[0-9]+}} = icmp slt i{{[0-9]+}} %{{[0-9]+}}, 0
-// OGCG: %{{[0-9]+}} = zext i1 %{{[0-9]+}} to i{{[0-9]+}}
+// OGCG: store double 1.000000e+00, ptr %{{.*}}
+// OGCG: bitcast double %{{.*}} to i64
+// OGCG: icmp slt i64 %{{.*}}, 0
+// OGCG: zext i1 %{{.*}} to i32
 }
 
 void test_signbit_negative_number(){
@@ -93,10 +93,10 @@ void test_signbit_negative_number(){
 // LLVM: icmp slt i64 %{{.*}}, 0
 // LLVM: zext i1 %{{.*}} to i32
 
-// OGCG: %{{[0-9]+}} = load double, ptr %[[V0:[a-zA-Z0-9]+]]
-// OGCG: %{{[0-9]+}} = bitcast double %{{[0-9]+}} to i{{[0-9]+}}
-// OGCG: %{{[0-9]+}} = icmp slt i{{[0-9]+}} %{{[0-9]+}}, 0
-// OGCG: %{{[0-9]+}} = zext i1 %{{[0-9]+}} to i{{[0-9]+}}
+// OGCG: store double -1.000000e+00, ptr %{{.*}}
+// OGCG: bitcast double %{{.*}} to i64
+// OGCG: icmp slt i64 %{{.*}}, 0
+// OGCG: zext i1 %{{.*}} to i32
 }
 
 void test_signbit_positive_nan(){
@@ -112,10 +112,10 @@ void test_signbit_positive_nan(){
 // LLVM: icmp slt i64 %{{.*}}, 0
 // LLVM: zext i1 %{{.*}} to i32
 
-// OGCG: %{{[0-9]+}} = load double, ptr %[[V0:[a-zA-Z0-9]+]]
-// OGCG: %{{[0-9]+}} = bitcast double %{{[0-9]+}} to i{{[0-9]+}}
-// OGCG: %{{[0-9]+}} = icmp slt i{{[0-9]+}} %{{[0-9]+}}, 0
-// OGCG: %{{[0-9]+}} = zext i1 %{{[0-9]+}} to i{{[0-9]+}}
+// OGCG: store double 0x7FF8000000000000, ptr %{{.*}}
+// OGCG: bitcast double %{{.*}} to i64
+// OGCG: icmp slt i64 %{{.*}}, 0
+// OGCG: zext i1 %{{.*}} to i32
 }
 
 void test_signbit_negative_nan(){
@@ -131,10 +131,10 @@ void test_signbit_negative_nan(){
 // LLVM: icmp slt i64 %{{.*}}, 0
 // LLVM: zext i1 %{{.*}} to i32
 
-// OGCG: %{{[0-9]+}} = load double, ptr %[[V0:[a-zA-Z0-9]+]]
-// OGCG: %{{[0-9]+}} = bitcast double %{{[0-9]+}} to i{{[0-9]+}}
-// OGCG: %{{[0-9]+}} = icmp slt i{{[0-9]+}} %{{[0-9]+}}, 0
-// OGCG: %{{[0-9]+}} = zext i1 %{{[0-9]+}} to i{{[0-9]+}}
+// OGCG: store double 0xFFF8000000000000, ptr %{{.*}}
+// OGCG: bitcast double %{{.*}} to i64
+// OGCG: icmp slt i64 %{{.*}}, 0
+// OGCG: zext i1 %{{.*}} to i32
 }
 
 void test_signbit_positive_infinity(){
@@ -150,10 +150,10 @@ void test_signbit_positive_infinity(){
 // LLVM: icmp slt i64 %{{.*}}, 0
 // LLVM: zext i1 %{{.*}} to i32
 
-// OGCG: %{{[0-9]+}} = load double, ptr %[[V0:[a-zA-Z0-9]+]]
-// OGCG: %{{[0-9]+}} = bitcast double %{{[0-9]+}} to i{{[0-9]+}}
-// OGCG: %{{[0-9]+}} = icmp slt i{{[0-9]+}} %{{[0-9]+}}, 0
-// OGCG: %{{[0-9]+}} = zext i1 %{{[0-9]+}} to i{{[0-9]+}}
+// OGCG: store double 0x7FF0000000000000, ptr %{{.*}}
+// OGCG: bitcast double %{{.*}} to i64
+// OGCG: icmp slt i64 %{{.*}}, 0
+// OGCG: zext i1 %{{.*}} to i32
 }
 
 void test_signbit_negative_infinity(){
@@ -169,10 +169,10 @@ void test_signbit_negative_infinity(){
 // LLVM: icmp slt i64 %{{.*}}, 0
 // LLVM: zext i1 %{{.*}} to i32
 
-// OGCG: %{{[0-9]+}} = load double, ptr %[[V0:[a-zA-Z0-9]+]]
-// OGCG: %{{[0-9]+}} = bitcast double %{{[0-9]+}} to i{{[0-9]+}}
-// OGCG: %{{[0-9]+}} = icmp slt i{{[0-9]+}} %{{[0-9]+}}, 0
-// OGCG: %{{[0-9]+}} = zext i1 %{{[0-9]+}} to i{{[0-9]+}}
+// OGCG: store double 0xFFF0000000000000, ptr %{{.*}}
+// OGCG: bitcast double %{{.*}} to i64
+// OGCG: icmp slt i64 %{{.*}}, 0
+// OGCG: zext i1 %{{.*}} to i32
 }
 
 ```
