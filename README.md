@@ -14,7 +14,7 @@ cmake -S llvm \
     -DCMAKE_C_COMPILER=clang \
     -DCMAKE_CXX_COMPILER=clang++ \
     -DLLVM_USE_LINKER=lld \
-    -DLLVM_TARGETS_TO_BUILD="AArch64;X86"
+    -DLLVM_TARGETS_TO_BUILD="AArch64;ARM;X86"
 ```
 
 
