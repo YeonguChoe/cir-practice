@@ -22,6 +22,12 @@ cmake -S llvm \
 ninja -j$(( $(nproc) / 2 ))
 ```
 
+# Rest to Original Clone
+
+```bash
+git reset --hard HEAD
+```
+
 # Test
 
 ```bash
