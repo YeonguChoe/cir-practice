@@ -173,3 +173,17 @@ define void @test_strict_fcmps(float %a, float %b) strictfp {
 }
 
 ```
+
+### Test
+
+```bash
+# DEBUG-NEXT: G_STRICT_FLDEXP (opcode {{[0-9]+}}): 2 type indices, 0 imm indices
+# DEBUG-NEXT:.. type index coverage check SKIPPED: no rules defined
+# DEBUG-NEXT:.. imm index coverage check SKIPPED: no rules defined
+# DEBUG-NEXT: G_STRICT_FCMP (opcode {{[0-9]+}}): 2 type indices, 0 imm indices
+# DEBUG-NEXT: .. type index coverage check SKIPPED: no rules defined
+# DEBUG-NEXT: .. imm index coverage check SKIPPED: no rules defined
+# DEBUG-NEXT: G_STRICT_FCMPS (opcode {{[0-9]+}}): 2 type indices, 0 imm indices
+# DEBUG-NEXT: .. type index coverage check SKIPPED: no rules defined
+# DEBUG-NEXT: .. imm index coverage check SKIPPED: no rules defined
+```
