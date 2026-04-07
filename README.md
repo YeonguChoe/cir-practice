@@ -22,10 +22,16 @@ cmake -S llvm \
 ninja -j$(( $(nproc) / 2 ))
 ```
 
-# Rest to Original Clone
+# Reset to Original Clone
 
+## Reset Repository
 ```bash
 git reset --hard HEAD
+```
+
+## Reset File
+```bash
+git restore <file>
 ```
 
 # Test
