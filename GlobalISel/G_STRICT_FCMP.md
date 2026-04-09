@@ -66,9 +66,9 @@ bool IRTranslator::translateConstrainedFPIntrinsic(
   if (EB == fp::ExceptionBehavior::ebIgnore)
     Flags |= MachineInstr::NoFPExcept;
 
-  switch (Opcode) {
-  case TargetOpcode::G_STRICT_FCMP:
-  case TargetOpcode::G_STRICT_FCMPS: {
+
+  if (Opcode == TargetOpcode::G_STRICT_FCMP ||
+      Opcode == TargetOpcode::G_STRICT_FCMPS) {
     auto *FPCmp = cast<ConstrainedFPCmpIntrinsic>(&FPI);
     Register Operand0 = getOrCreateVReg(*FPCmp->getArgOperand(0));
     Register Operand1 = getOrCreateVReg(*FPCmp->getArgOperand(1));
@@ -78,9 +78,6 @@ bool IRTranslator::translateConstrainedFPIntrinsic(
         .addUse(Operand0)
         .addUse(Operand1);
     return true;
-  }
-  default:
-    break;
   }
 
   SmallVector<llvm::SrcOp, 4> VRegs;
