@@ -1,5 +1,61 @@
 # __builtin_fpclassify
 
+
+### Test Code
+
+```c
+#include <fenv.h>
+#include <math.h>
+#include <stdint.h>
+#include <stdio.h>
+#include <string.h>
+
+#pragma STDC FENV_ACCESS ON
+
+double getDoubleSNaN() {
+  uint64_t doubleSNaNValue =
+      0b0111111111110000000000000000000000000000000000000000000000000001ULL;
+  double result;
+  memcpy(&result, &doubleSNaNValue, sizeof(double));
+  return result;
+}
+
+float getFloatSNaN() {
+  uint32_t floatSNaNValue = 0b01111111100000000000000000000001u;
+  float result;
+  memcpy(&result, &floatSNaNValue, sizeof(float));
+  return result;
+}
+
+int main() {
+
+  double doubleSNaN = getDoubleSNaN();
+  float floatSNaN = getFloatSNaN();
+
+  feclearexcept(FE_ALL_EXCEPT);
+
+  __builtin_fpclassify(FP_NAN, FP_INFINITE, FP_NORMAL, FP_SUBNORMAL, FP_ZERO,
+                       doubleSNaN);
+
+  __builtin_fpclassify(FP_NAN, FP_INFINITE, FP_NORMAL, FP_SUBNORMAL, FP_ZERO,
+                       floatSNaN);
+
+  if (fetestexcept(FE_INVALID)) {
+    printf("Test Failed: FE_INVALID Exception Has Thrown.\n");
+  } else {
+    printf("Test Passed\n");
+  }
+
+  return 0;
+}
+
+```
+
+```bash
+clang -ffp-exception-behavior=strict main.c -lm
+```
+
+
 ### lib/CodeGen/CGBuiltin.cpp
 
 ```cpp
