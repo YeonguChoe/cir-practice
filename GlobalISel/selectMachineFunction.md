@@ -144,3 +144,28 @@ TEST_F(AArch64GISelMITest, NewBlockWhileInstructionSelection) {
 } // namespace
 
 ```
+
+## unittests/CodeGen/GlobalISel/CMakeLists.txt
+
+```cpp
+add_llvm_unittest(GlobalISelTests
+  IRTranslatorBF16Test.cpp
+  ConstantFoldingTest.cpp
+  CSETest.cpp
+  GIMatchTableExecutorTest.cpp
+  LegalizerTest.cpp
+  LegalizerHelperTest.cpp
+  LegalizerInfoTest.cpp
+  MachineIRBuilderTest.cpp
+  GISelMITest.cpp
+  PatternMatchTest.cpp
+  KnownBitsTest.cpp
+  KnownFPClassTest.cpp
+  KnownBitsVectorTest.cpp
+  GISelUtilsTest.cpp
+  GISelAliasTest.cpp
+  CallLowering.cpp
+  InstructionSelectTest.cpp
+  InstructionSelectionTest.cpp
+  )
+```
