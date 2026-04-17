@@ -1,5 +1,28 @@
 # Make gMIR->MIR Instruction Selection to Process newly created block while Selection
 
+## algorithm
+
+```python
+BlockSuccessorList ← [Input Block]
+
+while BlockSuccessorList is not empty:
+    CurrentBlock ← last block from BlockSuccessorList
+    CurrentBlockSuccessorIterator ← CurrentBlock's successor iterator
+
+    if CurrentBlockSuccessorIterator has remaining successors:
+        Add the successor block to BlockSuccessorList
+        continue
+
+    VirtualRegisterCache ← current state of virtual registers
+
+    if a new block is created while instruction selection:
+        revert virtual register state using VirtualRegisterCache
+        put CurrentBlock back to BlockSuccessorList
+    else
+        Remove the rightmost block from BlockSuccessorList
+
+```
+
 ## lib/CodeGen/GlobalISel/InstructionSelect.cpp
 
 ```cpp
