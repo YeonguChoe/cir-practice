@@ -69,6 +69,43 @@ bool matchRemoveZextWhenLoweringShl(MachineInstr &MI,
 }
 ```
 
+```cpp
+void applyRemoveZextWhenLoweringShl(MachineInstr &MI,
+                                    MachineRegisterInfo &MRI,
+                                    MachineIRBuilder &B,
+                                    Register &MatchInfo) {
+  Register OriginalShiftAmt = MI.getOperand(2).getReg();
+  LLT OriginalShiftTy = MRI.getType(OriginalShiftAmt);
+  LLT SrcTy = MRI.getType(MatchInfo);
+
+  Register NewShiftAmt = MatchInfo;
+  // if shift amount is zero extended, replace it with new shift amount
+  if (OriginalShiftTy != SrcTy) {
+    B.setInstrAndDebugLoc(MI);
+    NewShiftAmt = B.buildAnyExt(OriginalShiftTy, MatchInfo).getReg(0);
+  }
+
+  MI.getOperand(2).setReg(NewShiftAmt);
+}
+```
+
+## llvm/test/CodeGen/AArch64/GlobalISel/combine-zext-shl.ll
+
+```llvm
+; RUN: llc -mtriple=aarch64-- -global-isel -O0 -o - %s | FileCheck %s
+
+define i8 @test_shl_i8(i8 %a, i8 %b) {
+  %r = shl i8 %a, %b
+  ret i8 %r
+}
+
+define i16 @test_shl_i16(i16 %a, i16 %b) {
+  %r = shl i16 %a, %b
+  ret i16 %r
+}
+
+```
+
 
 ### Reference
 - LSL instruction: https://developer.arm.com/documentation/ddi0602/2026-03/Base-Instructions/LSL--register---Logical-shift-left--register---an-alias-of-LSLV-?lang=en
